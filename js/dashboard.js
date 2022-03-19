@@ -16,7 +16,7 @@ document.getElementById("logout").addEventListener("click", (e) => {
 async function getCurrentWork(token) {
   // get pending Job
   const response = await axios.get(
-    "http://localhost:8080/works/currentwork?token=" + token
+    "https://api-work-management.herokuapp.com/works/currentwork?token=" + token
   );
   console.log(response.data);
 
@@ -42,7 +42,10 @@ async function getCurrentWork(token) {
   // pending-job-work
 
   const response_of_works = await axios.get(
-    "http://localhost:8080/jobs/" + _id + "/works?token=" + token
+    "https://api-work-management.herokuapp.com/jobs/" +
+      _id +
+      "/works?token=" +
+      token
   );
 
   if (response_of_works.data.error) {
@@ -132,7 +135,7 @@ async function createWork(job_id, token) {
   }
 
   const response = await axios.post(
-    "http://localhost:8080/works/creatework?token=" + token,
+    "https://api-work-management.herokuapp.com/works/creatework?token=" + token,
     {
       job_id,
       start: ` ${new Date().getHours()} : ${new Date().getMinutes()}`,
@@ -178,7 +181,10 @@ async function updateWork(work_id, token, ...works) {
   console.log(body);
 
   const response = await axios.put(
-    "http://localhost:8080/works/" + work_id + "/edit?token=" + token,
+    "https://api-work-management.herokuapp.com/works/" +
+      work_id +
+      "/edit?token=" +
+      token,
     {
       ...body,
     }
@@ -219,7 +225,9 @@ class UI {
 }
 
 async function deleteJob(id) {
-  const response = await axios.delete("http://localhost:8080/jobs/" + id);
+  const response = await axios.delete(
+    "https://api-work-management.herokuapp.com/jobs/" + id
+  );
 
   if (response.data.error) {
     console.log("unable to delete job");
@@ -232,7 +240,7 @@ async function deleteJob(id) {
 
 async function displayJobs(token) {
   const res = await axios.post(
-    "http://localhost:8080/user/jobs?token=" + token
+    "https://api-work-management.herokuapp.com/user/jobs?token=" + token
   );
   if (res.data.error) {
     console.log(res.data.error);
@@ -261,7 +269,7 @@ async function displayJobs(token) {
               <td>${estimated_time}</td>
               <td>${price}</td>
               <td>${completed ? "Done" : "Pending"}</td>
-              <td><a class="btn btn-info" href="http://localhost:8080/jobs/getdocument/${_id.toString()}">${doc}</a></td>
+              <td><a class="btn btn-info" href="https://api-work-management.herokuapp.com/jobs/getdocument/${_id.toString()}">${doc}</a></td>
               <td><button class="btn btn-md btn-success" onclick="workReport('${_id.toString()}')">Work</button></td>
               <td><button class="btn btn-md btn-info"  onclick="uploadReport('${job._id.toString()}')">Upload</button></td>
             </tr>
@@ -279,7 +287,7 @@ async function workReport(job_id) {
   }
 
   const response = await axios.get(
-    "http://localhost:8080/jobs/" +
+    "https://api-work-management.herokuapp.com/jobs/" +
       job_id +
       "/works?token=" +
       JSON.parse(localStorage.getItem("jobs-data")).token

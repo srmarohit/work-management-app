@@ -2,7 +2,7 @@
 
 async function validateToken(token) {
   const response = await axios.get(
-    "http://localhost:8080/verifyuser?token=" + token
+    "https://api-work-management.herokuapp.com/verifyuser?token=" + token
   );
   if (response.data.error) {
     return console.log("error : " + response.data.error);
@@ -34,7 +34,7 @@ document.getElementById("logout").addEventListener("click", (e) => {
 
 async function getUsers() {
   const response = await axios.post(
-    "http://localhost:8080/admin/users?token=" +
+    "https://api-work-management.herokuapp.com/admin/users?token=" +
       JSON.parse(localStorage.getItem("jobs-data")).token
   );
   if (response.data.error) {
@@ -61,7 +61,7 @@ function displayUsers(users) {
     /** check status of user */
 
     const response = await axios.get(
-      "http://localhost:8080/user/" +
+      "https://api-work-management.herokuapp.com/user/" +
         user._id.toString() +
         "/pendingjob?token=" +
         JSON.parse(localStorage.getItem("jobs-data")).token
@@ -88,7 +88,7 @@ function displayUsers(users) {
   // users.forEach(function(user) {
   //     /** check status of user */
   //   // let status = "offline" ;
-  //    axios.post("http://localhost:8080/user/currentjob/"+user._id.toString()).then(response => {
+  //    axios.post("https://api-work-management.herokuapp.com/user/currentjob/"+user._id.toString()).then(response => {
   //     document.getElementById("users-body").innerHTML += `
   //     <tr>
   //       <td>${user.fname} ${user.lname}</td>
@@ -112,7 +112,7 @@ function displayUsers(users) {
 /** Assign a new Job */
 async function assignJob(id) {
   const response = await axios.get(
-    "http://localhost:8080/user/" +
+    "https://api-work-management.herokuapp.com/user/" +
       id +
       "/pendingjob?token=" +
       JSON.parse(localStorage.getItem("jobs-data")).token
@@ -136,7 +136,7 @@ async function assignJob(id) {
 /** get Jobs of user */
 async function userReport(id) {
   const response = await axios.post(
-    "http://localhost:8080/user/" +
+    "https://api-work-management.herokuapp.com/user/" +
       id +
       "/jobs?token=" +
       JSON.parse(localStorage.getItem("jobs-data")).token
@@ -217,7 +217,7 @@ function displayJobs(jobs) {
             <td>${estimated_time}</td>
             <td>${price}</td>
             <td>${completed ? "Done" : "Pending"}</td>
-            <td><a class="btn btn-md btn-warning" href="http://localhost:8080/jobs/getdocument/${_id.toString()}">${doc}</a></td>
+            <td><a class="btn btn-md btn-warning" href="https://api-work-management.herokuapp.com/jobs/getdocument/${_id.toString()}">${doc}</a></td>
             <td><button class="btn btn-md btn-secondary" onclick="workReport('${_id.toString()}')">Work</button></td>
             <td><button class="btn btn-md btn-primary" onclick="editReport('${_id.toString()}', '${customer_name}', '${details}', '${estimated_time}', '${price}', '${completed}')">Edit</button></td>
             <td><button class="btn btn-md btn-info" onclick="uploadReport('${job._id.toString()}')">Upload</button></td>
@@ -236,7 +236,7 @@ async function workReport(job_id) {
   }
 
   const response = await axios.get(
-    "http://localhost:8080/jobs/" +
+    "https://api-work-management.herokuapp.com/jobs/" +
       job_id +
       "/works?token=" +
       JSON.parse(localStorage.getItem("jobs-data")).token
@@ -369,7 +369,7 @@ async function delWork(work_id) {
   }
 
   const response = await axios.delete(
-    "http://localhost:8080/works/" +
+    "https://api-work-management.herokuapp.com/works/" +
       work_id +
       "?token=" +
       JSON.parse(localStorage.getItem("jobs-data")).token
@@ -421,7 +421,7 @@ async function deleteReport(id) {
   }
 
   const response = await axios.delete(
-    "http://localhost:8080/jobs/" +
+    "https://api-work-management.herokuapp.com/jobs/" +
       id +
       "?token=" +
       JSON.parse(localStorage.getItem("jobs-data")).token
@@ -491,7 +491,7 @@ document.getElementById("edit-job-form") &&
         UI.showNotification("All fields are required!", "danger");
       } else {
         const response = await axios.put(
-          "http://localhost:8080/jobs/" +
+          "https://api-work-management.herokuapp.com/jobs/" +
             job_id +
             "/edit?token=" +
             JSON.parse(localStorage.getItem("jobs-data")).token,
@@ -549,7 +549,7 @@ document.getElementById("assign-job-form") &&
         console.log("if exec");
       } else {
         const response = await axios.post(
-          "http://localhost:8080/user/" +
+          "https://api-work-management.herokuapp.com/user/" +
             user_id +
             "/assignjob?token=" +
             JSON.parse(localStorage.getItem("jobs-data")).token,
@@ -604,7 +604,7 @@ document
     }
 
     const response = await axios.put(
-      "http://localhost:8080/works/" +
+      "https://api-work-management.herokuapp.com/works/" +
         work_id +
         "/edit?token=" +
         JSON.parse(localStorage.getItem("jobs-data")).token,
