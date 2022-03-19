@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job-Dashboard</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+
+<body>
+
+    <!-- Navigation Menu -->
+
+
+    <section class="container" id="admin">
+        <nav class="navbar navbar-light bg-light">
+            <a class="navbar-brand">Employee Dashboard</a>
+            <div class="d-flex flex-end">
+                <div class="text-right">
+                    <button id="logout" class="btn btn-warning">Logout</button>
+                </div>
+            </div>
+        </nav>
+
+    </section>
+
+    <!-- Job Listing Form -->
+    <!--
+    <section class="job" id="job">
+        <div class="text-right">
+            <button id="logout" class="btn btn-warning">Logout</button>
+        </div>
+        <div class="container mt-5 p-3 w-50 ">
+            <h1 class="text-center">Add New Job</h1>
+            <form id="job-form">
+                <div class="form-group">
+                    <label for="start">Start</label>
+                    <input type="time" class="form-control" id="start">
+                </div>
+                <div class="form-group">
+                    <label for="end">End</label>
+                    <input type="time" class="form-control" id="end">
+                </div>
+                <div class="form-group">
+                    <label for="details">Details</label>
+                    <input type="text" class="form-control" id="details">
+                </div>
+                <div class="form-group">
+                    <label for="notes">Notes</label>
+                    <input type="text" class="form-control" id="notes">
+                </div>
+                <button type="submit" class="btn btn-primary">Add Job</button>
+            </form>
+        </div>    
+    </section>
+    -->
+
+
+    <section class="current-job container my-2" id="current-job">
+        <div class="job-details jumbotron"></div>
+        <table class=" table current-works-table d-none" id="current-works-table">
+            <thead>
+                <th>Date</th>
+                <th>Start</th>
+                <th>Breaks</th>
+                <th>End</th>
+                <th>Total Hours</th>
+                <th>Notes</th>
+                <th>Action</th>
+            </thead>
+            <tbody class="current-works-body" id="current-works-body">
+                <!-- data comes from admin.js -->
+            </tbody>
+        </table>
+        <div class="work-action"></div>
+    </section>
+
+    <section class="jobs d-none" id="jobs">
+        <!-- jobs customer /  price / details / viewwork / upload doc / download doc -->
+        <table class=" table jobs-table" id="jobs-table">
+            <thead>
+                <th>Date</th>
+                <th>Customer</th>
+                <th>Details</th>
+                <th>Estimated Time</th>
+                <th>Price</th>
+                <th>Work Status</th>
+                <th>Document</th>
+                <th>Action</th>
+            </thead>
+            <tbody class="jobs-body" id="jobs-body">
+                <!-- data comes from admin.js -->
+            </tbody>
+        </table>
+    </section>
+
+
+
+    <section class="works d-none" id="works">
+        <!-- work / start / end / notes  -->
+        <table class=" table works-table" id="works-table">
+            <thead>
+                <th>Date</th>
+                <th>Start</th>
+                <th>Breaks</th>
+                <th>End</th>
+                <th>Total Hours</th>
+                <th>Notes</th>
+                <th>Action</th>
+            </thead>
+            <tbody class="works-body" id="works-body">
+                <!-- data comes from admin.js -->
+            </tbody>
+        </table>
+    </section>
+
+    <!-- Upload Document -->
+    <section class="upload-documents d-none " id="upload-documents">
+        <form id="upload-doc-form" action="http://localhost:8080/jobs/uploaddocument" method="POST"
+            enctype="multipart/form-data">
+            <div class="form-group d-lg-flex">
+                <input id="upload-id" name="updoc" type="hidden" />
+                <input type="file" class="form-control" name="doc" id="upload-doc" required />
+                <input class="btn btn-lg btn-success" type="submit"></input>
+                <button class="btn btn-warning" id="close-upload-form">close</button>
+            </div>
+        </form>
+    </section>
+
+
+
+    <!-- Script Loaded-->
+    <script src="js/dashboard.js" type="text/javascript"></script>
+</body>
+
+</html>
